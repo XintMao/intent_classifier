@@ -1,0 +1,41 @@
+#!/bin/bash
+#SBATCH --job-name=distill_student
+#SBATCH --partition=boost_usr_prod
+#SBATCH --account=euhpc_d30_025
+#SBATCH --time=04:00:00
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=32G
+#SBATCH --gres=gpu:1
+#SBATCH --output=slurm/logs/distill_student_%j.out
+#SBATCH --error=slurm/logs/distill_student_%j.err
+
+module load python/3.11.7
+module load cuda/12.3
+
+export HF_HOME=/leonardo_scratch/large/userexternal/xmao0000/hf_cache
+export TRANSFORMERS_CACHE=/leonardo_scratch/large/userexternal/xmao0000/hf_cache
+export HF_DATASETS_OFFLINE=1
+export TRANSFORMERS_OFFLINE=1
+export HF_HUB_OFFLINE=1
+
+cd /leonardo_scratch/large/userexternal/xmao0000/intent-classifier
+source train_venv/bin/activate
+
+mkdir -p models/student slurm/logs
+
+python scripts/distill_student.py \
+    --data-dir      data/soft_labels \
+    --test-data     data/splits/test.json \
+    --model-name    microsoft/deberta-v3-xsmall \
+    --output-dir    models/student \
+    --epochs        20 \
+    --batch-size    32 \
+    --learning-rate 5e-5 \
+    --max-length    128 \
+    --temperature   3.0 \
+    --alpha         0.7 \
+    --warmup-ratio  0.1 \
+    --weight-decay  0.01 \
+    --seed          42

@@ -1,0 +1,27 @@
+# API keys
+.anthropic_key
+
+# Model files (too large for git)
+models/
+hf_cache/
+
+# Virtual environments
+venv/
+train_venv/
+
+# Data files (large)
+data/topics/
+data/generated/
+data/soft_labels/
+data/supplementary/batch_*
+
+# SLURM logs
+slurm/logs/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Misc
+test.txt
+logs/
