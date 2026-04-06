@@ -1,0 +1,40 @@
+# API keys - never upload
+.anthropic_key
+
+# Virtual environments
+venv/
+train_venv/
+
+# HuggingFace cache
+hf_cache/
+
+# Large intermediate data
+data/topics/
+data/generated/
+data/soft_labels/
+data/supplementary/batch_*
+
+# SLURM logs
+slurm/logs/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# OS files
+.DS_Store
+
+# Logs
+logs/
+
+# Misc
+test.txt
+
+# Intermediate label cache batches (keep only final labeled_queries.json)
+data/labeled/label_cache/
+
+# Large PyTorch checkpoints - only keep ONNX for deployment
+models/teacher/
+models/student/
+models/onnx/model.onnx

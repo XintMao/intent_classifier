@@ -1,0 +1,23 @@
+{
+  "model_name": "deberta-v3-xsmall-intent-classifier",
+  "base_model": "microsoft/deberta-v3-xsmall",
+  "num_labels": 4,
+  "label_names": [
+    "recency",
+    "authority",
+    "mechanism",
+    "general"
+  ],
+  "max_length": 128,
+  "quantization": "INT8 dynamic",
+  "onnx_opset": 14,
+  "model_size_mb": 270.63,
+  "quantized_size_mb": 83.11,
+  "compression_ratio": 3.26,
+  "avg_latency_ms": 244.45,
+  "p95_latency_ms": 402.76,
+  "test_macro_f1_pytorch": 0.9494,
+  "test_macro_f1_onnx": 0.9451,
+  "quantization_gap": 0.0043,
+  "threshold": 0.5
+}
